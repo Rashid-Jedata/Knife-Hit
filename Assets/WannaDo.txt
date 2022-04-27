@@ -1,0 +1,2 @@
+1-be able to get data
+2- Show Knives Left

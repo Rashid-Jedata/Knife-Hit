@@ -1,0 +1,42 @@
+﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+
+enum AudioClips
+{
+    Crash, Hit, Shoot, TargetDestroyed
+}
+
+public class AudioManager : MonoBehaviour
+{
+    internal static AudioManager instance;
+
+    AudioSource audioSource;
+
+    [SerializeField]
+    List<AudioClip> Clips;
+
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+
+        ChangeMusicVolume();
+    }
+
+    internal void PlayerClip(AudioClips Name)
+    {
+        audioSource.PlayOneShot(Clips[(int)Name]);
+    }
+
+    internal void ChangeMusicVolume()
+    {
+        audioSource.volume = ConfigurationData.MusicVolume;
+    }
+
+}
