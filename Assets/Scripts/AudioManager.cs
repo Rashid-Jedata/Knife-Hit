@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 enum AudioClips
 {
@@ -27,6 +28,13 @@ public class AudioManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
 
         ChangeMusicVolume();
+        ChangeBackGroundMusicVolume();
+    }
+
+    private void ChangeBackGroundMusicVolume()
+    {
+        audioSource.volume = ConfigurationData.BackGroundMusicVolume;
+        print(ConfigurationData.MusicVolume);
     }
 
     internal void PlayerClip(AudioClips Name)
@@ -37,6 +45,7 @@ public class AudioManager : MonoBehaviour
     internal void ChangeMusicVolume()
     {
         audioSource.volume = ConfigurationData.MusicVolume;
+        print(ConfigurationData.MusicVolume);
     }
 
 }

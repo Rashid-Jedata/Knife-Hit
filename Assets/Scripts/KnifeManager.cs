@@ -46,10 +46,7 @@ public class KnifeManager : MonoBehaviour
 
     }
 
-
-
-
-    #endregion
+   #endregion
 
     #region My Methods
 
@@ -192,7 +189,6 @@ public class KnifeManager : MonoBehaviour
     {
         List<Rigidbody2D> pieces = new List<Rigidbody2D>();
 
-        print(targetPiecesFather.childCount);
 
         for (int i = 0; i < targetPiecesFather.childCount; i++)
         {

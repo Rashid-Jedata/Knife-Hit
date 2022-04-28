@@ -62,6 +62,7 @@ public class LevelDifficultyChange : MonoBehaviour
         target.speed = Random.Range(-ConfigurationData.RangeSpeed, ConfigurationData.RangeSpeed);
         yield return new WaitForSeconds(Random.Range(1, ConfigurationData.WaitToChangeSpeed));
         StartCoroutine(ChangeSpeed());
+        print("The Speed : " + ConfigurationData.RangeSpeed);
     }
 
     #endregion

@@ -1,2 +1,2 @@
-1-be able to get data
+1- Set Sliders
 2- Show Knives Left

@@ -68,9 +68,4 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Menu");
     }
 
-    private void OnApplicationQuit()
-    {
-        ConfigurationData.SaveData();
-    }
-
 }

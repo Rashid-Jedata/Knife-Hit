@@ -6,118 +6,28 @@ using System;
 
 public static class ConfigurationData
 {
-    #region Fileds And Properties Of Data
-    private static int meduimScore;
-
-    public static int MeduimScore
-    {
-        get { return meduimScore; }
-        set
-        {
-            values["MeduimScore"] = meduimScore;
-            meduimScore = value;
-        }
-    }
-
-    private static int hardScoreScore;
-    public static int HardScoreScore
-    {
-        get { return hardScoreScore; }
-        set
-        {
-            values["HardScoreScore"] = hardScoreScore;
-            hardScoreScore = value;
-        }
-    }
+    #region Properties Of Data
+    public static int MeduimScore { get; set; }
 
 
-    private static float waitToChangeSpeed;
-    public static float WaitToChangeSpeed
-    {
-        get { return waitToChangeSpeed; }
-        set
-        {
-            values["WaitToChangeSpeed"] = waitToChangeSpeed;
-            waitToChangeSpeed = value;
-        }
-    }
+    public static int HardScoreScore { get; set; }
 
-    private static float easyLevelSpeed;
-    public static float EasyLevelSpeed
-    {
-        get { return easyLevelSpeed; }
-        set
-        {
-            values["EasyLevelSpeed"] = easyLevelSpeed;
-            easyLevelSpeed = value;
-        }
-    }
 
-    private static float rangeSpeed;
-    public static float RangeSpeed
-    {
-        get { return rangeSpeed; }
-        set
-        {
-            values["RangeSpeed"] = rangeSpeed;
-            rangeSpeed = value;
-        }
-    }
+    public static float WaitToChangeSpeed { get; set; }
 
-    private static int knivesCountHardLevel;
-    public static int KnivesCountHardLevel
-    {
-        get { return knivesCountHardLevel; }
-        set
-        {
-            values["KnivesCountHardLevel"] = knivesCountHardLevel;
-            knivesCountHardLevel = value;
-        }
-    }
+    public static float EasyLevelSpeed { get; set; }
 
-    private static float musicVolume;
-    public static float MusicVolume
-    {
-        get { return musicVolume; }
-        set
-        {
-            values["MusicVolume"] = musicVolume;
-            musicVolume = value;
-        }
-    }
+    public static float RangeSpeed { get; set; }
 
-    private static float backGroundMusicVolume;
-    public static float BackGroundMusicVolume
-    {
-        get { return backGroundMusicVolume; }
-        set
-        {
-            values["BackGroundMusicVolume"] = backGroundMusicVolume;
-            backGroundMusicVolume = value;
-        }
-    }
+    public static int KnivesCountHardLevel { get; set; }
 
-    private static float knifeSpeed;
-    public static float KnifeSpeed
-    {
-        get { return knifeSpeed; }
-        set
-        {
-            values["KnifeSpeed"] = knifeSpeed;
-            knifeSpeed = value;
-        }
-    }
+    public static float MusicVolume { get; set; }
 
-    private static int scoreAdd;
-    public static int ScoreAdd
-    {
-        get { return scoreAdd; }
-        set
-        {
-            values["ScoreAdd"] = scoreAdd;
-            scoreAdd = value;
-        }
-    }
+    public static float BackGroundMusicVolume { get; set; }
+
+    public static float KnifeSpeed { get; set; }
+
+    public static int ScoreAdd { get; set; }
     #endregion
 
     #region Fileds 
@@ -141,6 +51,21 @@ public static class ConfigurationData
         values["ScoreAdd"] = 10;
     }
     private static string path() { return Path.Combine(Application.streamingAssetsPath, dataFileName); }
+    private static void NewInstanceData()
+    {
+        values = new Dictionary<string, float>();
+        values.Add("MeduimScore", 30);
+        values.Add("HardScoreScore", 50);
+        values.Add("WaitToChangeSpeed", 6);
+        values.Add("EasyLevelSpeed", 15);
+        values.Add("RangeSpeed", 20);
+        values.Add("KnivesCountHardLevel", 4);
+        values.Add("MusicVolume", 0.089f);
+        values.Add("BackGroundMusicVolume", 0.01f);
+        values.Add("KnifeSpeed", 600);
+        values.Add("ScoreAdd", 10);
+    }
+
     private static void SetValues()
     {
         MeduimScore = (int)values["MeduimScore"];
@@ -169,44 +94,33 @@ public static class ConfigurationData
             {
                 string line = sr.ReadLine();
 
-                while (string.IsNullOrEmpty(line))
+                while (!string.IsNullOrEmpty(line))
                 {
                     string[] val = line.Split(',');
-                    values.Add(val[0].Trim(), Convert.ToInt32(val[1].Trim()));
+                    values[val[0].Trim()] = Convert.ToInt32(val[1].Trim());
                     line = sr.ReadLine();
                 }
 
             }
-            catch (Exception) { SetDefaultData(); }
+            catch (Exception) { }
         }
         SetValues();
     }
 
-    private static void NewInstanceData()
-    {
-        values = new Dictionary<string, float>();
-        values.Add("MeduimScore", 30);
-        values.Add("HardScoreScore", 50);
-        values.Add("WaitToChangeSpeed", 6);
-        values.Add("EasyLevelSpeed", 15);
-        values.Add("RangeSpeed", 20);
-        values.Add("KnivesCountHardLevel", 4);
-        values.Add("MusicVolume", 0.089f);
-        values.Add("BackGroundMusicVolume", 0.01f);
-        values.Add("KnifeSpeed", 600);
-        values.Add("ScoreAdd", 10);
-    }
-
-    public static void SaveData()
+    internal static void SaveData()
     {
         using (StreamWriter sr = new StreamWriter(path()))
         {
             try
             {
+                values["BackGroundMusicVolume"] = BackGroundMusicVolume;
+                values["MusicVolume"] = MusicVolume;
+
                 foreach (var item in values)
                 {
                     sr.WriteLine($"{item.Key} , {item.Value}");
                 }
+
             }
             catch (Exception) { }
         }

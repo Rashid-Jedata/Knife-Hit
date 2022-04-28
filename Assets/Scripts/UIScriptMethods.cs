@@ -22,12 +22,18 @@ public class UIScriptMethods : MonoBehaviour
         instance = this;
 
         ConfigurationData.GetData();
+
+        if (musicSlider == null) return;
+        musicSlider.value = ConfigurationData.MusicVolume;
+        backGroundMusicSlider.value = ConfigurationData.BackGroundMusicVolume;
+
     }
 
     private void Start()
     {
         GetComponent<AudioSource>()
       .volume = ConfigurationData.BackGroundMusicVolume;
+      
         //Cant work cuz AudioManager is null in that case
         if (musicSlider == null) return;
         musicSlider.onValueChanged.AddListener(delegate
@@ -39,6 +45,7 @@ public class UIScriptMethods : MonoBehaviour
         {
             ConfigurationData.BackGroundMusicVolume = backGroundMusicSlider.value;
         });
+
 
         //I did it here instead of AudioManager So that I will control
         //the volume of the clip in the menu as well with one code
@@ -65,6 +72,7 @@ public class UIScriptMethods : MonoBehaviour
 
 
     #endregion
+
 
 
 
