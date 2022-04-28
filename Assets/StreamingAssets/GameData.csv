@@ -4,5 +4,7 @@ WaitToChangeSpeed , 6
 EasyLevelSpeed , 50
 RangeSpeed , 100
 KnivesCountHardLevel , 4
+MusicVolume , 0.089
+BackGroundMusicVolume , 0.01
 KnifeSpeed , 600
 ScoreAdd , 10

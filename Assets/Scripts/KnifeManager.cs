@@ -22,7 +22,8 @@ public class KnifeManager : MonoBehaviour
     SpriteRenderer targetFlash;
     [SerializeField]
     Transform targetPiecesFather;
-
+    [SerializeField]
+    UIScriptMethods UI;
     #endregion
 
     #region Unity Methods
@@ -42,7 +43,9 @@ public class KnifeManager : MonoBehaviour
         InstantiateKnife();
         knifes++;
 
-        KnifesCount = Random.Range(2, 7);
+        KnifesCount = Random.Range(2, 10);
+        UI.ShowKnivesStart(KnifesCount);
+
 
     }
 
@@ -92,6 +95,7 @@ public class KnifeManager : MonoBehaviour
     {
         //Add Score First
         GameManager.instance.AddScore();
+        UI.UpdateKnives();
 
         if (KnifesCount > knifes)
         {
